@@ -3,7 +3,7 @@ import React from "react";
 export default function SidebarLink({ text, Icon, active }) {
   return (
     <div
-      className={`flex items-center space-x-4 text-lg text-gray-300 xl:justify-start hoverAnimation ${
+      className={`flex justify-center items-center space-x-4 text-lg text-gray-300 lg:justify-start hoverAnimation ${
         active && "font-bold"
       }`}
     >

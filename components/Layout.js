@@ -3,8 +3,9 @@ import Sidebar from "./Sidebar";
 
 export default function Layout({ children }) {
   return (
-    <main className="flex min-h-screen bg-black max-w-[1800px] mx-auto">
+    <main className="flex flex-row min-h-screen bg-black lg:max-w-[1200px] mx-auto w-full">
       <Sidebar />
+      {children}
     </main>
   );
 }

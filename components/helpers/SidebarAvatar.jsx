@@ -4,7 +4,7 @@ export default function SidebarAvatar() {
   return (
     <a
       href="#"
-      className="flex-shrink-0 hidden block w-56 mt-auto mb-4 group hoverAnimation lg:inline"
+      className="flex flex-shrink-0 w-auto mt-auto mb-4 lg:w-56 group lg:hoverAnimation lg:inline"
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center">
@@ -15,7 +15,7 @@ export default function SidebarAvatar() {
               alt=""
             />
           </div>
-          <div className="ml-3">
+          <div className="hidden ml-3 lg:inline">
             <p className="text-sm font-medium text-gray-400 group-hover:text-gray-200">
               Tom Cook
             </p>
@@ -24,7 +24,7 @@ export default function SidebarAvatar() {
             </p>
           </div>
         </div>
-        <HiDotsHorizontal className="text-gray-200" />
+        <HiDotsHorizontal className="hidden text-gray-200 lg:inline" />
       </div>
     </a>
   );
