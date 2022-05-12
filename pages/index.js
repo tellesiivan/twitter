@@ -1,9 +1,16 @@
 import Head from "next/head";
-import Image from "next/image";
 import Feed from "../components/Feed";
 import Widgets from "../components/Widgets";
+import { useSession, getProviders, getSession } from "next-auth/react";
+import Login from "../components/Login";
 
-export default function Home() {
+export default function Home({ trending, following, providers }) {
+  const { data: session } = useSession();
+
+  if (!session) return <Login providers={providers} />;
+
+  console.log(session);
+
   return (
     <>
       <Head>
@@ -16,4 +23,25 @@ export default function Home() {
       <Widgets />
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const trending = await fetch("https://jsonkeeper.com/b/NKEV").then((res) =>
+    res.json()
+  );
+  const following = await fetch("https://jsonkeeper.com/b/WWMJ").then((res) =>
+    res.json()
+  );
+
+  const providers = await getProviders();
+  const session = await getSession(context); // get session on the server side to prevent flickering
+
+  return {
+    props: {
+      trending,
+      following,
+      session,
+      providers,
+    },
+  };
 }
