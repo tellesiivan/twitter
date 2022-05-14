@@ -13,15 +13,18 @@ export default function Feed() {
     onSnapshot(q, (querySnapshot) => {
       const posts = [];
       querySnapshot.forEach((doc) => {
-        posts.push(doc.data());
+        posts.push({
+          ...doc.data(),
+          id: doc.id,
+        }); /* add post id to post array */
       });
       setPost(posts);
     });
   }, []);
 
   return (
-    <div className="flex-1  sm:ml-[73px] lg:ml-[240px] border-gray-800 sm:border-l md:border-r md:min-w-[500px] lg:min-w-[600px] border-l-none">
-      <div className="sticky top-0 flex items-center px-2 py-4 text-gray-300 border-b border-gray-800 sm:px-3 sm:justify-between ">
+    <div className="flex-1  sm:ml-[73px] lg:ml-[240px] border-gray-800 sm:border-l md:border-r md:min-w-[500px] lg:min-w-[600px] border-l-none ">
+      <div className="sticky top-0 z-40 flex items-center px-2 py-4 text-gray-300 bg-black border-b border-gray-800 sm:px-3 sm:justify-between">
         <h2 className="font-semibold text-md sm:text-xl">Home</h2>
         <div className="flex items-center justify-center w-10 h-10 ml-auto hoverAnimation lg:px-0">
           <HiOutlineSparkles size="1.3em" />
