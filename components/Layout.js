@@ -1,6 +1,7 @@
 import React from "react";
 import Sidebar from "./Sidebar";
 import { useSession } from "next-auth/react";
+import Widgets from "./Widgets";
 
 export default function Layout({ children }) {
   const { data: session } = useSession();
@@ -9,6 +10,7 @@ export default function Layout({ children }) {
     <main className="flex flex-row min-h-screen bg-black lg:max-w-[1200px] mx-auto w-full">
       {session && <Sidebar />}
       {children}
+      <Widgets />
     </main>
   );
 }

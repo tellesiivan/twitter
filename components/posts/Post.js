@@ -39,19 +39,22 @@ export default function Post({ post, postPage, id }) {
     onSnapshot(q, (docSnapshot) => {
       setLikes(docSnapshot.docs);
     });
-  }, []);
+  }, [id]);
 
   useEffect(
     () =>
       setLiked(likes.findIndex((like) => like.id === session.user?.uid) !== -1),
-    [likes]
+    [likes, session.user?.uid]
   );
+  likes.map((like) => console.log(like.id));
 
   const likePost = async () => {
+    const docRef = doc(dbRef, "posts", id, "likes", session.user.uid); /// using users session id to detect who the like belongs to (we add a specific id to help us identify who liked it)
+
     if (liked) {
-      await deleteDoc(doc(dbRef, "posts", id, "likes", session.user.uid)); // delete the user logged in from the likes collection
+      await deleteDoc(docRef); // delete the user logged in from the likes collection
     } else {
-      await setDoc(doc(dbRef, "posts", id, "likes", session.user.uid), {
+      await setDoc(docRef, {
         // we set a sub "likes" collection and add the id us the session user that liked it and store their name as data
         user: session.user.name,
       });
@@ -60,7 +63,7 @@ export default function Post({ post, postPage, id }) {
 
   return (
     <div
-      className="flex p-3 px-2 border-b border-gray-800 cursor-pointer sm:px-3"
+      className="flex p-3 px-2 border-b border-gray-800 cursor-pointer sm:px-3 hover:bg-[#111] last:border-none"
       onClick={() => router.push(`/${id}`)}
     >
       {!postPage && (

@@ -31,7 +31,7 @@ export default function Feed() {
         </div>
       </div>
       <NewPostInput />
-      <div className="pb-20 ">
+      <div className="pb-4 ">
         {posts.length > 0 ? (
           <PostsList posts={posts} />
         ) : (
