@@ -22,7 +22,7 @@ export default function Widgets() {
         </div>
       </div>
       <div className="text-gray-300 space-y-3 bg-[#202327] w-11/12 xl:w-9/12 pt-2 rounded-xl overflow-hidden">
-        <h4 className="px-2 font-bold text-md">What's happening</h4>
+        <h4 className="px-2 font-bold text-md">What&#39;s happening</h4>
         {trending.map((r, i) => (
           <Trending key={i} trend={r} />
         ))}
@@ -42,6 +42,7 @@ export default function Widgets() {
               width={50}
               height={50}
               objectFit="cover"
+              alt=""
               className="rounded-full"
             />
             <div className="ml-4 leading-5 group">

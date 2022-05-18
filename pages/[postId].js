@@ -72,7 +72,9 @@ export default function PostPage({ trending, following }) {
     <>
       <Head>
         <title>
-          {post?.user?.name} on Twitter: "{post?.text ? post?.text : "Post"}"
+          {post?.user?.name} on Twitter: &quot;
+          {post?.text ? post?.text : "Post"}
+          &quot;
         </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
