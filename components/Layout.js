@@ -13,7 +13,8 @@ export default function Layout({ children }) {
     <main className="flex flex-row min-h-screen bg-black lg:max-w-[1200px] mx-auto w-full">
       {session && <Sidebar />}
       {children}
-      <Widgets />
+      {session && <Widgets />}
+
       {isOpen && <Modal />}
     </main>
   );

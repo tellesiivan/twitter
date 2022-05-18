@@ -27,7 +27,7 @@ export default function SidebarAvatar() {
         </div>
         <HiDotsHorizontal
           className="hidden text-gray-200 lg:inline"
-          onClick={() => signOut()}
+          onClick={() => signOut({ callbackUrl: "/" })}
         />
       </div>
     </div>

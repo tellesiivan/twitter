@@ -6,7 +6,7 @@ import Image from "next/image";
 import Trending from "./Trending";
 
 export default function Widgets() {
-  const [trending, setTrending] = useRecoilState(trendingState);
+  const [trendingItems, setTrending] = useRecoilState(trendingState);
   const [followResults, setFollowing] = useRecoilState(followingState);
 
   return (
@@ -23,7 +23,7 @@ export default function Widgets() {
       </div>
       <div className="text-gray-300 space-y-3 bg-[#202327] w-11/12 xl:w-9/12 pt-2 rounded-xl overflow-hidden">
         <h4 className="px-2 font-bold text-md">What&#39;s happening</h4>
-        {trending.map((r, i) => (
+        {trendingItems.map((r, i) => (
           <Trending key={i} trend={r} />
         ))}
         <button className="hover:bg-white hover:bg-opacity-[0.03] px-4 py-3 cursor-pointer transition duration-200 ease-out flex items-center justify-between w-full text-[#1d9bf0] font-light">
