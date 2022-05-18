@@ -3,14 +3,14 @@ import Feed from "../components/Feed";
 import Widgets from "../components/Widgets";
 import { useSession, getProviders, getSession } from "next-auth/react";
 import Login from "../components/Login";
-import Modal from "../components/Modal";
-import { modalState } from "../atoms/modalAtom";
 import { useRecoilState } from "recoil";
-
+import { trendingState, followingState } from "../atoms/widgetsAtom";
 
 export default function Home({ trending, following, providers }) {
-  const [isOpen, setIsOpen] = useRecoilState(modalState);
-
+  const [trding, setTrending] = useRecoilState(trendingState);
+  const [fllowing, setFollowing] = useRecoilState(followingState);
+  setFollowing(following);
+  setTrending(trending);
   const { data: session } = useSession();
 
   if (!session) return <Login providers={providers} />;
@@ -24,8 +24,6 @@ export default function Home({ trending, following, providers }) {
       </Head>
 
       <Feed />
-      <Widgets />
-      {isOpen && <Modal />}
     </>
   );
 }

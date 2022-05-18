@@ -13,8 +13,10 @@ import {
 
 import SidebarLink from "./helpers/SidebarLink";
 import SidebarAvatar from "./helpers/SidebarAvatar";
+import { useRouter } from "next/router";
 
 export default function Sidebar() {
+  const router = useRouter();
   return (
     <div className="fixed flex-col items-center hidden h-full p-2 sm:flex lg:items-start ">
       <div className="flex items-center justify-center p-0 w-14 h-14 hoverAnimation ">
@@ -23,6 +25,7 @@ export default function Sidebar() {
           alt=""
           height={30}
           width={30}
+          onClick={() => router.push("/")}
         />
       </div>
       <div className="space-y-1.5 mt-8 mb-2.5 lg:mt-6">

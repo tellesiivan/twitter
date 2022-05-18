@@ -1,7 +1,6 @@
 import Post from "./Post";
 
 export default function PostsList({ posts }) {
-  console.log(posts);
   return (
     <>
       {posts.map((post) => (

@@ -31,13 +31,13 @@ export default function Feed() {
         </div>
       </div>
       <NewPostInput />
-      <div className="pb-4 ">
+      <>
         {posts.length > 0 ? (
           <PostsList posts={posts} />
         ) : (
           <span className="text-white text-md">There are no posts</span>
         )}
-      </div>
+      </>
     </div>
   );
 }

@@ -34,6 +34,18 @@ export default function Post({ post, postPage, id }) {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState([]);
 
+  useEffect(
+    () =>
+      onSnapshot(
+        query(
+          collection(dbRef, "posts", id, "comments"),
+          orderBy("timestamp", "desc")
+        ),
+        (snapshot) => setComments(snapshot.docs)
+      ),
+    [id]
+  );
+
   useEffect(() => {
     const q = collection(dbRef, "posts", id, "likes");
     onSnapshot(q, (docSnapshot) => {
@@ -44,9 +56,8 @@ export default function Post({ post, postPage, id }) {
   useEffect(
     () =>
       setLiked(likes.findIndex((like) => like.id === session.user?.uid) !== -1),
-    [likes, session.user?.uid]
+    [likes, session?.user?.uid]
   );
-  likes.map((like) => console.log(like.id));
 
   const likePost = async () => {
     const docRef = doc(dbRef, "posts", id, "likes", session.user.uid); /// using users session id to detect who the like belongs to (we add a specific id to help us identify who liked it)
@@ -80,25 +91,23 @@ export default function Post({ post, postPage, id }) {
             /* eslint-disable-next-line @next/next/no-img-element */
             <img
               src={post?.user.image}
-              alt={post.user.name}
+              alt={post?.user.name}
               className=" w-10 h-10 rounded-full sm:mr-2.5 mr-1.5"
             />
           )}
           <div className="text-gray-500">
             <div className="inline-flex items-center group">
               <h4
-                className={`text-xs text-gray-300 font-semibold group-hover:text-[#1d9bf0] ${
+                className={`text-xs mr-1 text-gray-300 font-semibold group-hover:text-[#1d9bf0] ${
                   !postPage && "inline-block"
                 }`}
               >
                 {post?.user.name}
               </h4>
-              <span className={`text-xs ${!postPage && "ml-1.5"}`}>
-                @{post?.user.tag} -{" "}
-              </span>
+              <span className={`text-xs `}> @{post?.user.tag} - </span>
             </div>
             <span className="text-[11px] ml-1.5">
-              <Moment fromNow>{post.timestamp?.toDate()}</Moment>
+              <Moment fromNow>{post?.timestamp?.toDate()}</Moment>
             </span>
             {!postPage && post.text != " " && (
               <p className="mt-1 text-sm text-gray-100">{post?.text}</p>
@@ -124,6 +133,7 @@ export default function Post({ post, postPage, id }) {
             className="flex items-center space-x-1 group"
             onClick={(e) => {
               e.stopPropagation();
+              console.log(isOpen);
               setPostId(id);
               setIsOpen(true);
             }}
@@ -138,7 +148,7 @@ export default function Post({ post, postPage, id }) {
             )}
           </div>
 
-          {session.user.uid == post?.user.uid ? (
+          {session?.user.uid == post?.user.uid ? (
             <div
               className="flex items-center space-x-1 group"
               onClick={(e) => {
